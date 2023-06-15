@@ -24,6 +24,7 @@
 			pkgs.vimv
 			pkgs.xclip
 			pkgs.zoxide
+			pkgs.tree-sitter
 			pkgs.solvespace
 			pkgs.xcolor
 			pkgs.exiftool
@@ -54,16 +55,16 @@
 			-- require "pears".setup()
 
 			-- Tressitter
-			-- require'nvim-treesitter.configs'.setup {
+			require'nvim-treesitter.configs'.setup {
 				-- ensure_installed = "all",
-					--								 indent = {
-						--								 enable = true,
-						--						 },
-					-- highlight = {
-						--   enable = true,
-						--   additional_vim_regex_highlighting = true
-							-- },
-					--	}
+					indent = {
+						enable = true,
+					},
+					highlight = {
+						enable = true,
+						additional_vim_regex_highlighting = true
+					},
+			}
 		-- Comment
 			require('Comment').setup()
 
@@ -341,12 +342,22 @@
 # lsp
 				nvim-lspconfig
 				nvim-compe
+# nvim-treesitter.withAllGrammars
+				   (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
+						p.c
+						p.css
+						p.go
+						p.java
+						p.javascript
+						p.json
+						p.tsx
+						p.typescript
+					 ]))
 
 # snippet
 				ultisnips
 # vim-react-snippets
 				emmet-vim
-#nvim-treesitter.withAllGrammars
 
 # estilizacao
 				nvim-highlight-colors
