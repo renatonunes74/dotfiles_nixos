@@ -270,7 +270,7 @@
 
 			-- Markdown preview
 			vim.cmd([[
-					let g:mkdp_auto_start = 1
+					" let g:mkdp_auto_start = 1
 					function! SetMarkdownCSS()
 					let layout = matchstr(getline(1), 'layout:\s*\zs\S\+')
 					if layout ==# 'teste'
@@ -421,7 +421,7 @@
 			mv = "mv -n";
 			pow = "doas systemctl poweroff";
 			r = "rg -i.";
-			rd = "rm -rfI";
+			rd = "rm -rf";
 			reboot = "doas reboot";
 			rename = "rename -a -o";
 			rename2 = "sh $HOME/.config/rename2.sh";
