@@ -6,12 +6,14 @@
 	home.stateVersion = "23.05"; # Please read the comment before changing.
 		home.packages = [
 		pkgs.android-tools
+		pkgs.dunst
 			pkgs.chromium
 			pkgs.mutt
 			pkgs.sfeed
 			pkgs.nsxiv
 			pkgs.fasd
 			pkgs.maim
+			pkgs.python3Minimal
 			pkgs.nodePackages.typescript
 			pkgs.nodePackages.typescript-language-server
 #			pkgs.nodePackages.vscode-html-languageserver-bin
@@ -44,6 +46,19 @@
 	};
 
 	programs.home-manager.enable = true;
+	services.dunst = {
+		enable = true;
+		settings = {
+			global = {
+				font = "tamzen 8";
+				frame_width = 1;
+				frame_color = "#005577";
+				background = "#0a0f14";
+				foreground = "#99d1ce";
+			};
+		};
+	};
+
 	programs.neovim = {
 		enable = true;
 #defaultEditor = true;
@@ -68,16 +83,16 @@
 		-- Comment
 			require('Comment').setup()
 
-					-- Spectre / auto replace
-					vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").open()<CR>')
-					vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>')
-					vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>')
-					vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>')
+			-- Spectre / auto replace
+			vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").open()<CR>')
+			vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>')
+			vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>')
+			vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>')
 
-					require('spectre').setup({
-							color_devicons = false,
-							live_update = true,
-							})
+			require('spectre').setup({
+					color_devicons = false,
+					live_update = true,
+					})
 
 		-- Git message
 			require('gitsigns').setup {
@@ -231,40 +246,40 @@
 			local check_back_space = function()
 			local col = vim.fn.col(".") - 1
 			return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
-									     end
+																													 end
 
-										-- Use (s-)tab to:
-											--- move to prev/next item in completion menuone
-											--- jump to prev/next snippet"s placeholder
-											_G.tab_complete = function()
-											if vim.fn.pumvisible() == 1 then
-												return t "<C-n>"
-													elseif vim.fn["vsnip#available"](1) == 1 then
-													return t "<Plug>(vsnip-expand-or-jump)"
-													elseif check_back_space() then
-													return t "<Tab>"
-											else
-												return vim.fn["compe#complete"]()
-													end
-													end
-													_G.s_tab_complete = function()
-													if vim.fn.pumvisible() == 1 then
-														return t "<C-p>"
-															elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-															return t "<Plug>(vsnip-jump-prev)"
-													else
-														-- If <S-Tab> is not working in your terminal, change it to <C-h>
-															return t "<S-Tab>"
-															end
-															end
+																															-- Use (s-)tab to:
+																																--- move to prev/next item in completion menuone
+																																--- jump to prev/next snippet"s placeholder
+																																_G.tab_complete = function()
+																																if vim.fn.pumvisible() == 1 then
+																																	return t "<C-n>"
+																																		elseif vim.fn["vsnip#available"](1) == 1 then
+																																		return t "<Plug>(vsnip-expand-or-jump)"
+																																		elseif check_back_space() then
+																																		return t "<Tab>"
+																																else
+																																	return vim.fn["compe#complete"]()
+																																		end
+																																		end
+																																		_G.s_tab_complete = function()
+																																		if vim.fn.pumvisible() == 1 then
+																																			return t "<C-p>"
+																																				elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+																																				return t "<Plug>(vsnip-jump-prev)"
+																																		else
+																																			-- If <S-Tab> is not working in your terminal, change it to <C-h>
+																																				return t "<S-Tab>"
+																																				end
+																																				end
 
-															vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-															vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-															vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-															vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+																																				vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+																																				vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+																																				vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+																																				vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
-															-- Ultisnips
-															vim.g.UltiSnipsSnippetDirectories = { "/home/void/.config/nvim/snippets/vim-react-snippets/" }
+																																				-- Ultisnips
+																																				vim.g.UltiSnipsSnippetDirectories = { "/home/void/.config/nvim/snippets/vim-react-snippets/" }
 		-- Remove problems with <TAB> and nvim compe
 			vim.cmd("let g:UltiSnipsExpandTrigger = '<CR>'")
 
@@ -290,6 +305,8 @@
 			vim.cmd([[
 					map <F6> :setlocal spell! spelllang=pt_br,en_us<CR>
 					let spell_language_list = "brasileiro, american, castellano"
+
+					set guifont=tamzen:h11
 
 					function! SetupMappings()
 					nmap <buffer> <Tab> j
@@ -326,7 +343,7 @@
 		plugins = with pkgs.vimPlugins; [
 # utilidades
 			comment-nvim
-firenvim
+				firenvim
 				fzf-vim
 				markdown-preview-nvim
 				nvim-spectre
@@ -345,14 +362,14 @@ firenvim
 				nvim-compe
 # nvim-treesitter.withAllGrammars
 				(pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
-									      p.c
-									      p.css
-									      p.go
-									      p.java
-									      p.javascript
-									      p.json
-									      p.tsx
-									      p.typescript
+																											p.c
+																											p.css
+																											p.go
+																											p.java
+																											p.javascript
+																											p.json
+																											p.tsx
+																											p.typescript
 				]))
 
 # snippet
@@ -374,15 +391,15 @@ firenvim
 # 		definedAliases = [ "@sx" ];
 # 	};
 # };
-#			userChrome = ''
-#				@import "${
-#					builtins.fetchGit {
-#						url = "https://github.com/renatonunes74/firefox-cli-theme";
-#						ref = "main";
-#						rev = "b522f41f15abe82e4b2c2d27317c8f4d1527723f"; # <-- Change this
-#					}
-#				}/userChrome.css";
-#			'';
+			userChrome = ''
+				@import "${
+					builtins.fetchGit {
+						url = "https://github.com/renatonunes74/firefox-cli-theme";
+						ref = "main";
+						rev = "b522f41f15abe82e4b2c2d27317c8f4d1527723f"; # <-- Change this
+					}
+				}/userChrome.css";
+			'';
 		};
 		profiles.default.settings = {
 # Enable userChrome customizations
@@ -437,10 +454,10 @@ firenvim
 			vno = "doas nixos-rebuild edit";
 			vs = "nvim $HOME/.config/st-0.8.5/config.h";
 			vsf = "nvim $HOME/.sfeed/sfeedrc";
-			xi = "doas pacman -S";
-			xo = "doas pacman -remove -Oo";
+			xi = "nix-env -iAv";
+			xo = "nix-env --uninstall";
 			xq = "doas pacman -query -Rs";
-			xr = "doas pacman -R";
+			xr = "nix-env --uninstall";
 			xu = "doas pacman -Syu";
 			zz = "doas systemctl suspend"; 
 #sf = "sfeed_update $HOME/.sfeed/sfeedrc && sfeed_curses $HOME/.sfeed/feeds/*";
