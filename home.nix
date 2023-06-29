@@ -16,6 +16,7 @@
 			pkgs.python3Minimal
 			pkgs.nodePackages.typescript
 			pkgs.nodePackages.typescript-language-server
+			pkgs.xdragon
 #			pkgs.nodePackages.vscode-html-languageserver-bin
 #		pkgs.nodePackages.vscode-langservers-extracted
 			pkgs.nodePackages.yaml-language-server
@@ -57,6 +58,12 @@
 				foreground = "#99d1ce";
 			};
 		};
+	};
+	programs.zathura = {
+	enable = true;
+		extraConfig = ''
+			set selection-clipboard clipboard
+			'';
 	};
 
 	programs.neovim = {
@@ -102,6 +109,9 @@
 		-- Config
 			vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 			vim.o.completeopt = "menuone,noselect"
+
+			-- remover
+			vim.cmd('source $HOME/teste.lua')
 
 			-- Keymaps
 			vim.g.mapleader = " "
