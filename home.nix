@@ -436,6 +436,7 @@
 			hs = "home-manager switch";
 			ne = "sudo nvim /etc/nixos/configuration.nix";
 			ns = "sudo nixos-rebuild switch";
+			ghre = "gh repo edit $(gh repo list | fzf | awk '{print $1}')";
 			c = "xclip -selection clipboard";
 			d = "fasd_cd -d";
 			e = "echo";
@@ -447,6 +448,7 @@
 			md = "mkdir -pv";
 			ms = "mpv --no-video --shuffle $HOME/msc";
 			mv = "mv -n";
+			spring="sh ~/projetos/spring_cli/spring_cli.sh";
 			pow = "doas systemctl poweroff";
 			r = "rg -i.";
 			rd = "rm -rf";
