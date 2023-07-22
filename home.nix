@@ -39,6 +39,7 @@
 #pkgs.hledger-iadd
 			pkgs.nodePackages.create-react-app
 #pkgs.nodePackages.vscode-css-languageserver-bin
+			pkgs.jdt-language-server
 			];
 
 	home.sessionVariables = {
@@ -76,23 +77,18 @@
 			vim.cmd("let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-']")
 			-- Requires
 			-- Auto pairs
-			-- require "pears".setup()
-			local config = {
-				cmd = {'${pkgs.jdt-language-server}/bin/jdt-language-server'},
-				root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
-			}
-		-- require('jdtls').start_or_attach(config)
+			require "pears".setup()
 
 			-- Tressitter
 			require'nvim-treesitter.configs'.setup {
 				-- ensure_installed = "all",
-				indent = {
-					enable = true,
-				},
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = true
-				},
+					indent = {
+						enable = true,
+					},
+					highlight = {
+						enable = true,
+						additional_vim_regex_highlighting = true
+					},
 			}
 		-- Comment
 			require('Comment').setup()
@@ -362,7 +358,7 @@
 				markdown-preview-nvim
 				nvim-spectre
 				undotree
-#nvim-jdtls
+				nvim-jdtls
 				vim-easymotion
 # git
 				vim-fugitive
@@ -374,8 +370,8 @@
 # sintaxe
 				vim-ledger
 				bullets-vim
+				pears-nvim
 
-#pears-nvim
 # lsp
 				nvim-lspconfig
 				nvim-compe
