@@ -72,20 +72,27 @@
 		viAlias = true;
 		vimAlias = true;
 		extraLuaConfig = ''
+			-- bullets-vim
+			vim.cmd("let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-']")
 			-- Requires
 			-- Auto pairs
 			-- require "pears".setup()
+			local config = {
+				cmd = {'${pkgs.jdt-language-server}/bin/jdt-language-server'},
+				root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+			}
+		-- require('jdtls').start_or_attach(config)
 
 			-- Tressitter
 			require'nvim-treesitter.configs'.setup {
 				-- ensure_installed = "all",
-					indent = {
-						enable = true,
-					},
-					highlight = {
-						enable = true,
-						additional_vim_regex_highlighting = true
-					},
+				indent = {
+					enable = true,
+				},
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = true
+				},
 			}
 		-- Comment
 			require('Comment').setup()
@@ -351,23 +358,30 @@
 								\ 'sink': 'Ex'}))
 
 					inoremap <silent><expr> <C-Space>      compe#confirm('<CR>')
+
 					]])
 					'';
 		plugins = with pkgs.vimPlugins; [
 # utilidades
-			comment-nvim
+			zoxide-vim
+				comment-nvim
 				firenvim
 				fzf-vim
 				markdown-preview-nvim
 				nvim-spectre
 				undotree
+#nvim-jdtls
 				vim-easymotion
 # git
 				vim-fugitive
 				gitsigns-nvim
 
+# coc-java
+# coc-nvim
+
 # sintaxe
 				vim-ledger
+				bullets-vim
 
 #pears-nvim
 # lsp
