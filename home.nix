@@ -23,7 +23,7 @@
 			pkgs.nodejs
 			pkgs.ripgrep
 			pkgs.rnix-lsp
-			#pkgs.sumneko-lua-language-server
+#pkgs.sumneko-lua-language-server
 			pkgs.vimv
 			pkgs.xclip
 			pkgs.zoxide
@@ -60,7 +60,7 @@
 		};
 	};
 	programs.zathura = {
-	enable = true;
+		enable = true;
 		extraConfig = ''
 			set selection-clipboard clipboard
 			'';
@@ -311,6 +311,9 @@
 					augroup END
 			]])
 
+			-- remover
+			vim.cmd('source $HOME/teste.lua')
+
 			-- Arrumar
 			vim.cmd([[
 					map <F6> :setlocal spell! spelllang=pt_br,en_us<CR>
@@ -372,14 +375,14 @@
 				nvim-compe
 # nvim-treesitter.withAllGrammars
 				(pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
-																											p.c
-																											p.css
-																											p.go
-																											p.java
-																											p.javascript
-																											p.json
-																											p.tsx
-																											p.typescript
+															  p.c
+															  p.css
+															  p.go
+															  p.java
+															  p.javascript
+															  p.json
+															  p.tsx
+															  p.typescript
 				]))
 
 # snippet
@@ -454,7 +457,7 @@
 			rd = "rm -rf";
 			reboot = "doas reboot";
 			rename = "rename -a -o";
-			rename2 = "sh $HOME/.config/rename2.sh";
+			rename2 = "sh $HOME/rename2.sh";
 			sf = "sfeed_curses $HOME/.sfeed/feeds/*";
 			vb = "nvim $HOME/.bashrc";
 			vc = "nvim /usr/bin/compile";
