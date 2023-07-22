@@ -117,9 +117,6 @@
 			vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 			vim.o.completeopt = "menuone,noselect"
 
-			-- remover
-			vim.cmd('source $HOME/teste.lua')
-
 			-- Keymaps
 			vim.g.mapleader = " "
 			vim.g.maplocalleader = " "
@@ -127,18 +124,13 @@
 			vim.opt.backspace = "2"
 
 			vim.cmd('filetype on')
-			vim.cmd('source $HOME/nix/gotham.vim')
+			-- vim.cmd('source $HOME/nix/gotham.vim')
 			vim.cmd('syntax on')
 
 			-- Copy selected code with VISUAL + Leader + y
 			vim.cmd('vnoremap <silent><Leader>y "yy <Bar> :call system("xclip -selection clipboard", @y)<CR>: echo "Copiado com sucesso"<CR>')
 
-			vim.api.nvim_set_option('shiftwidth',2)
-			vim.api.nvim_set_option('smartindent',true)
-			vim.api.nvim_set_option('softtabstop',2)
-			vim.api.nvim_set_option('tabstop',2)
 			vim.cmd('set nuw=1')
-			vim.cmd('setlocal tabstop=2 shiftwidth=2 softtabstop=2')
 			vim.wo.number = true
 			vim.wo.relativenumber = true
 
@@ -263,40 +255,40 @@
 			local check_back_space = function()
 			local col = vim.fn.col(".") - 1
 			return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
-																													 end
+																 end
 
-																															-- Use (s-)tab to:
-																																--- move to prev/next item in completion menuone
-																																--- jump to prev/next snippet"s placeholder
-																																_G.tab_complete = function()
-																																if vim.fn.pumvisible() == 1 then
-																																	return t "<C-n>"
-																																		elseif vim.fn["vsnip#available"](1) == 1 then
-																																		return t "<Plug>(vsnip-expand-or-jump)"
-																																		elseif check_back_space() then
-																																		return t "<Tab>"
-																																else
-																																	return vim.fn["compe#complete"]()
-																																		end
-																																		end
-																																		_G.s_tab_complete = function()
-																																		if vim.fn.pumvisible() == 1 then
-																																			return t "<C-p>"
-																																				elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-																																				return t "<Plug>(vsnip-jump-prev)"
-																																		else
-																																			-- If <S-Tab> is not working in your terminal, change it to <C-h>
-																																				return t "<S-Tab>"
-																																				end
-																																				end
+																	-- Use (s-)tab to:
+																		--- move to prev/next item in completion menuone
+																		--- jump to prev/next snippet"s placeholder
+																		_G.tab_complete = function()
+																		if vim.fn.pumvisible() == 1 then
+																			return t "<C-n>"
+																				elseif vim.fn["vsnip#available"](1) == 1 then
+																				return t "<Plug>(vsnip-expand-or-jump)"
+																				elseif check_back_space() then
+																				return t "<Tab>"
+																		else
+																			return vim.fn["compe#complete"]()
+																				end
+																				end
+																				_G.s_tab_complete = function()
+																				if vim.fn.pumvisible() == 1 then
+																					return t "<C-p>"
+																						elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+																						return t "<Plug>(vsnip-jump-prev)"
+																				else
+																					-- If <S-Tab> is not working in your terminal, change it to <C-h>
+																						return t "<S-Tab>"
+																						end
+																						end
 
-																																				vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-																																				vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-																																				vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-																																				vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+																						vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+																						vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+																						vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+																						vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
-																																				-- Ultisnips
-																																				vim.g.UltiSnipsSnippetDirectories = { "/home/void/.config/nvim/snippets/vim-react-snippets/" }
+																						-- Ultisnips
+																						vim.g.UltiSnipsSnippetDirectories = { "/home/void/.config/nvim/snippets/vim-react-snippets/" }
 		-- Remove problems with <TAB> and nvim compe
 			vim.cmd("let g:UltiSnipsExpandTrigger = '<CR>'")
 
@@ -496,13 +488,13 @@
 			if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi
 				PS1='%~ '
 # Shell color
-					GOTHAM_SHELL="$HOME/.config/gotham/gotham.sh"
-					[[ -s $GOTHAM_SHELL ]] && source $GOTHAM_SHELL
+# GOTHAM_SHELL="$HOME/.config/gotham/gotham.sh"
+# [[ -s $GOTHAM_SHELL ]] && source $GOTHAM_SHELL
 # Auto correction
 					setopt correctall
 # Prompt git branch
-						autoload -Uz vcs_info
-						precmd() { vcs_info }
+					autoload -Uz vcs_info
+					precmd() { vcs_info }
 		setopt PROMPT_SUBST
 			RPROMPT=\$vcs_info_msg_0_
 			zstyle ':vcs_info:git:*' formats '%b'
