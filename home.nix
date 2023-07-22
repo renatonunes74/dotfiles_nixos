@@ -6,7 +6,7 @@
 	home.stateVersion = "23.05"; # Please read the comment before changing.
 		home.packages = [
 		pkgs.android-tools
-		pkgs.dunst
+			pkgs.dunst
 			pkgs.chromium
 			pkgs.mutt
 			pkgs.sfeed
