@@ -17,8 +17,7 @@
 			pkgs.nodePackages.typescript
 			pkgs.nodePackages.typescript-language-server
 			pkgs.xdragon
-#			pkgs.nodePackages.vscode-html-languageserver-bin
-#		pkgs.nodePackages.vscode-langservers-extracted
+			pkgs.nodePackages.vscode-langservers-extracted
 			pkgs.nodePackages.yaml-language-server
 			pkgs.nodejs
 			pkgs.ripgrep
@@ -38,7 +37,6 @@
 			pkgs.hledger-web
 #pkgs.hledger-iadd
 			pkgs.nodePackages.create-react-app
-#pkgs.nodePackages.vscode-css-languageserver-bin
 			pkgs.jdt-language-server
 			];
 
