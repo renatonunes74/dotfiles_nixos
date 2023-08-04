@@ -17,7 +17,7 @@
 			pkgs.nodePackages.typescript
 			pkgs.nodePackages.typescript-language-server
 			pkgs.xdragon
-			pkgs.nodePackages.vscode-langservers-extracted
+			# pkgs.nodePackages.vscode-langservers-extracted
 			pkgs.nodePackages.yaml-language-server
 			pkgs.nodejs
 			pkgs.ripgrep
