@@ -52,9 +52,9 @@
 			global = {
 				font = "tamzen 8";
 				frame_width = 1;
-				frame_color = "#005577";
-				background = "#0a0f14";
-				foreground = "#99d1ce";
+				frame_color = "#1b1b1b";
+				background = "#000000";
+				foreground = "#ffffff";
 			};
 		};
 	};
